@@ -10,7 +10,7 @@ public class DungeonGenerator : MonoBehaviour {
 
     public GameObject floorPrefab;
     public GameObject wallPrefab;
-    // public GameObject playerPrefab;
+    public GameObject playerPrefab;
     // public GameObject ghostEnemyPrefab;
 
     public int seed = 0;
@@ -28,10 +28,10 @@ public class DungeonGenerator : MonoBehaviour {
     public List<Room> roomList = new List<Room>();
 
     public Dictionary<Vector3Int,TileType> dungeon = new Dictionary<Vector3Int,TileType>();
-    //public Dictionary<Vector3Int,EntityType> entities = new Dictionary<Vector3Int,EntityType>();
+    public Dictionary<Vector3Int,EntityType> entities = new Dictionary<Vector3Int,EntityType>();
 
     public void Start() {
-        Generate();
+        //Generate();
     }
 
     public void Generate() {
@@ -40,7 +40,7 @@ public class DungeonGenerator : MonoBehaviour {
         AllocateRooms();
         ConnectRooms();
         AllocateWalls();
-        //AllocatePlayer();
+        AllocatePlayer();
         //AllocateEnemies();
         SpawnDungeon();
 
@@ -252,14 +252,14 @@ public class DungeonGenerator : MonoBehaviour {
 
     }
 
-    // public void AllocatePlayer() {
+    public void AllocatePlayer() {
 
-    //     int randomRoomNumber = Random.Range(0,roomList.Count);
-    //     Room randomRoom = roomList[randomRoomNumber];
-    //     roomList[randomRoomNumber].containsPlayer = true;
-    //     entities.Add(randomRoom.GetRandomTile(),EntityType.Player);
+        int randomRoomNumber = Random.Range(0,roomList.Count);
+        Room randomRoom = roomList[randomRoomNumber];
+        roomList[randomRoomNumber].containsPlayer = true;
+        entities.Add(randomRoom.GetRandomTile(),EntityType.Player);
 
-    // }
+    }
 
     // public void AllocateEnemies() {
 
@@ -301,23 +301,23 @@ public class DungeonGenerator : MonoBehaviour {
             }
         }
 
-        // foreach(KeyValuePair<Vector3Int,EntityType> kv in entities) {
-        //     switch(kv.Value) {
+        foreach(KeyValuePair<Vector3Int,EntityType> kv in entities) {
+            switch(kv.Value) {
 
-        //         case EntityType.Player:
-        //             GameObject player = Instantiate(playerPrefab,kv.Key,Quaternion.identity);
-        //             player.GetComponent<PlayerController>().startPos.x = kv.Key.x;
-        //             player.GetComponent<PlayerController>().startPos.y = kv.Key.y;
-        //             break;
+                case EntityType.Player:
+                    GameObject player = Instantiate(playerPrefab,kv.Key,Quaternion.identity);
+                    //player.GetComponent<PlayerController>().startPos.x = kv.Key.x;
+                    //player.GetComponent<PlayerController>().startPos.y = kv.Key.y;
+                    break;
 
-        //         case EntityType.GhostEnemy:
-        //             GameObject enemy = Instantiate(ghostEnemyPrefab,kv.Key,Quaternion.identity);
-        //             enemy.GetComponent<EnemyController>().startPos.x = kv.Key.x;
-        //             enemy.GetComponent<EnemyController>().startPos.y = kv.Key.y;
-        //             break;
+                // case EntityType.GhostEnemy:
+                //     GameObject enemy = Instantiate(ghostEnemyPrefab,kv.Key,Quaternion.identity);
+                //     enemy.GetComponent<EnemyController>().startPos.x = kv.Key.x;
+                //     enemy.GetComponent<EnemyController>().startPos.y = kv.Key.y;
+                //     break;
 
-        //     }
-        // }
+            }
+        }
 
     }
 
@@ -331,7 +331,7 @@ public class Room {
     public int minY;
     public int maxY;
 
-    //public bool containsPlayer;
+    public bool containsPlayer;
 
     public List<Room> connectedRooms = new List<Room>();
 

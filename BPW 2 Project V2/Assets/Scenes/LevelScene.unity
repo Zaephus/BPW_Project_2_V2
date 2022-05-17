@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2011115346}
   - component: {fileID: 2011115345}
+  - component: {fileID: 2011115347}
   m_Layer: 0
   m_Name: Dungeon
   m_TagString: Untagged
@@ -154,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorPrefab: {fileID: 2880854223412604503, guid: 4b5317847dadb6145a5416b468a444b9, type: 3}
   wallPrefab: {fileID: 8030317466967924066, guid: 963622a794243b04396514d455ada3de, type: 3}
+  playerPrefab: {fileID: 3898488427165075690, guid: b544de40fe8d63245ae6f3809bcbfd8e, type: 3}
   seed: 0
   gridWidth: 30
   gridHeight: 30
@@ -176,3 +178,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2011115347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011115344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd309a6fa5f93f46be261271f22a2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
