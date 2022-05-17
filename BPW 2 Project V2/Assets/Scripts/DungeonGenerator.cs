@@ -202,7 +202,7 @@ public class DungeonGenerator : MonoBehaviour {
             }
             for(int i = -corridorBuffer; i <= corridorBuffer; i++) {
                 TileType value;
-                if(dungeon.TryGetValue(new Vector3Int(x,posOne.y+1,0),out value)) {
+                if(dungeon.TryGetValue(new Vector3Int(x,posOne.y+i,0),out value)) {
                     if(value == TileType.Corridor) {
                         return false;
                     }
