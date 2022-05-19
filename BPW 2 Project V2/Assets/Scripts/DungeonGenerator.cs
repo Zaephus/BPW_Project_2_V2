@@ -11,14 +11,14 @@ public class DungeonGenerator : MonoBehaviour {
     public GameObject floorPrefab;
     public GameObject wallPrefab;
     public GameObject playerPrefab;
-    // public GameObject ghostEnemyPrefab;
+    public GameObject enemyPrefab;
 
     public int seed = 0;
 
     public int gridWidth = 30;
     public int gridHeight = 30;
 
-    //public int enemyAmount = 8;
+    public int enemyAmount = 8;
 
     public int spaceBetweenRooms = 3;
 
@@ -30,10 +30,6 @@ public class DungeonGenerator : MonoBehaviour {
     public Dictionary<Vector3Int,TileType> dungeon = new Dictionary<Vector3Int,TileType>();
     public Dictionary<Vector3Int,EntityType> entities = new Dictionary<Vector3Int,EntityType>();
 
-    public void Start() {
-        //Generate();
-    }
-
     public void Generate() {
 
         GetSeed();
@@ -41,7 +37,7 @@ public class DungeonGenerator : MonoBehaviour {
         ConnectRooms();
         AllocateWalls();
         AllocatePlayer();
-        //AllocateEnemies();
+        AllocateEnemies();
         SpawnDungeon();
 
         //SaveSystem.instance.SaveSeed(seed,"DungeonSeed");
@@ -261,28 +257,28 @@ public class DungeonGenerator : MonoBehaviour {
 
     }
 
-    // public void AllocateEnemies() {
+    public void AllocateEnemies() {
 
-    //     List<Room> tempRooms = new List<Room>();
-    //     foreach(Room r in roomList) {
-    //         if(!r.containsPlayer) {
-    //             tempRooms.Add(r);
-    //         }
-    //     }
+        List<Room> tempRooms = new List<Room>();
+        foreach(Room r in roomList) {
+            if(!r.containsPlayer) {
+                tempRooms.Add(r);
+            }
+        }
 
-    //     for(int i = 0; i < enemyAmount; i++) {
-    //         Room randomRoom = tempRooms[Random.Range(0,tempRooms.Count)];
-    //         Vector3Int pos = randomRoom.GetRandomTile();
+        for(int i = 0; i < enemyAmount; i++) {
+            Room randomRoom = tempRooms[Random.Range(0,tempRooms.Count)];
+            Vector3Int pos = randomRoom.GetRandomTile();
 
-    //         if(entities.ContainsKey(pos)) {
-    //             i--;
-    //         }
-    //         else {
-    //             entities.Add(pos,EntityType.GhostEnemy);
-    //         }
-    //     }
+            if(entities.ContainsKey(pos)) {
+                i--;
+            }
+            else {
+                entities.Add(pos,EntityType.GhostEnemy);
+            }
+        }
 
-    // }
+    }
 
     public void SpawnDungeon() {
 
@@ -310,11 +306,11 @@ public class DungeonGenerator : MonoBehaviour {
                     //player.GetComponent<PlayerController>().startPos.y = kv.Key.y;
                     break;
 
-                // case EntityType.GhostEnemy:
-                //     GameObject enemy = Instantiate(ghostEnemyPrefab,kv.Key,Quaternion.identity);
-                //     enemy.GetComponent<EnemyController>().startPos.x = kv.Key.x;
-                //     enemy.GetComponent<EnemyController>().startPos.y = kv.Key.y;
-                //     break;
+                case EntityType.GhostEnemy:
+                    GameObject enemy = Instantiate(enemyPrefab,kv.Key,Quaternion.identity);
+                    //enemy.GetComponent<EnemyController>().startPos.x = kv.Key.x;
+                    //enemy.GetComponent<EnemyController>().startPos.y = kv.Key.y;
+                    break;
 
             }
         }

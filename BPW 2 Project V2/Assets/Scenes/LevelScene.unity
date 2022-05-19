@@ -156,9 +156,11 @@ MonoBehaviour:
   floorPrefab: {fileID: 2880854223412604503, guid: 4b5317847dadb6145a5416b468a444b9, type: 3}
   wallPrefab: {fileID: 8030317466967924066, guid: 963622a794243b04396514d455ada3de, type: 3}
   playerPrefab: {fileID: 3898488427165075690, guid: b544de40fe8d63245ae6f3809bcbfd8e, type: 3}
+  enemyPrefab: {fileID: 1494348910416182475, guid: 4c61167c3d0193e429a911bc0d9d491d, type: 3}
   seed: 0
   gridWidth: 30
   gridHeight: 30
+  enemyAmount: 1
   spaceBetweenRooms: 3
   numRooms: 6
   minRoomSize: 4

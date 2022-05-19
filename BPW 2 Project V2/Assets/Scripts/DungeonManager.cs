@@ -6,7 +6,8 @@ public class DungeonManager : MonoBehaviour {
 
     private DungeonGenerator dungeonGen;
 
-    [SerializeField] private PlayerManager player;
+    [HideInInspector] public PlayerManager player;
+    private List<EnemyController> enemies;
 
     public Dictionary<Vector3Int,TileType> dungeon = new Dictionary<Vector3Int,TileType>();
 
@@ -20,10 +21,22 @@ public class DungeonManager : MonoBehaviour {
         player = FindObjectOfType<PlayerManager>();
         player.OnStart();
 
+        enemies = new List<EnemyController>(FindObjectsOfType<EnemyController>());
+
+        for(int i = 0; i < enemies.Count; i++) {
+            enemies[i].Initialize(this);
+        }
+
     }
 
     public void Update() {
+
         player.OnUpdate();
+
+        for(int i = 0; i < enemies.Count; i++) {
+            enemies[i].OnUpdate();
+        }
+
     }
 
     public bool EntityOnTile(Vector3Int targetTile) {
