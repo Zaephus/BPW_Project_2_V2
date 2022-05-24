@@ -331,15 +331,15 @@ public class Room {
 
     public List<Room> connectedRooms = new List<Room>();
 
-    public Room(int _minx,int _maxX,int _minY,int _maxY) {
-        minX = _minx;
+    public Room(int _minX,int _maxX,int _minY,int _maxY) {
+        minX = _minX;
         maxX = _maxX;
         minY = _minY;
         maxY = _maxY;
     }
 
     public Vector3Int GetCenter() {
-        return new Vector3Int(Mathf.RoundToInt(Mathf.Lerp(minX,maxX,0.5f)),Mathf.RoundToInt(Mathf.Lerp(minY,maxY,0.05f)),0);
+        return new Vector3Int(Mathf.RoundToInt(Mathf.Lerp(minX,maxX,0.5f)),Mathf.RoundToInt(Mathf.Lerp(minY,maxY,0.5f)),0);
     }
 
     public Vector3Int GetRandomTile() {
