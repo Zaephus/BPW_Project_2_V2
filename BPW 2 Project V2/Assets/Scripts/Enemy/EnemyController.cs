@@ -142,41 +142,40 @@ public class EnemyController : MonoBehaviour {
 
             }
         }
-        Debug.Log(tiles[Random.Range(0,tiles.Count)]);
         return tiles[Random.Range(0,tiles.Count)];
 
     }
 
     private void Move(string dir) {
 
-        int x = targetPosition.x;
-        int y = targetPosition.y;
+        int x = nextPosition.x;
+        int y = nextPosition.y;
 
         switch(dir) {
 
             case "Right":
-                x = targetPosition.x+1;
-                y = targetPosition.y;
+                x = nextPosition.x+1;
+                y = nextPosition.y;
                 break;
 
             case "Left":
-                x = targetPosition.x-1;
-                y = targetPosition.y;
+                x = nextPosition.x-1;
+                y = nextPosition.y;
                 break;
             
             case "Up":
-                x = targetPosition.x;
-                y = targetPosition.y+1;
+                x = nextPosition.x;
+                y = nextPosition.y+1;
                 break;
             
             case "Down":
-                x = targetPosition.x;
-                y = targetPosition.y-1;
+                x = nextPosition.x;
+                y = nextPosition.y-1;
                 break;
 
         }
 
-        targetPosition = new Vector3Int(x,y,0);
+        nextPosition = new Vector3Int(x,y,0);
 
     }
 
@@ -184,29 +183,29 @@ public class EnemyController : MonoBehaviour {
 
         bool canMove = true;
 
-        int x = targetPosition.x;
-        int y = targetPosition.y;
+        int x = nextPosition.x;
+        int y = nextPosition.y;
 
         switch(dir) {
 
             case "Right":
-                x = targetPosition.x+1;
-                y = targetPosition.y;
+                x = nextPosition.x+1;
+                y = nextPosition.y;
                 break;
 
             case "Left":
-                x = targetPosition.x-1;
-                y = targetPosition.y;
+                x = nextPosition.x-1;
+                y = nextPosition.y;
                 break;
             
             case "Up":
-                x = targetPosition.x;
-                y = targetPosition.y+1;
+                x = nextPosition.x;
+                y = nextPosition.y+1;
                 break;
             
             case "Down":
-                x = targetPosition.x;
-                y = targetPosition.y-1;
+                x = nextPosition.x;
+                y = nextPosition.y-1;
                 break;
 
         }
@@ -221,7 +220,6 @@ public class EnemyController : MonoBehaviour {
         else {
             canMove = true;
         }
-
         return canMove;
         
     }

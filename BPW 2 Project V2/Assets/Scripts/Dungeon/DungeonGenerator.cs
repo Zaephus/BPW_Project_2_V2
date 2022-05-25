@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum TileType {Room,Corridor,Wall}
+public enum TileType {Room,Corridor,Wall,Exit}
 public enum EntityType {Player,GhostEnemy}
 
 public class DungeonGenerator : MonoBehaviour {
 
     public GameObject floorPrefab;
     public GameObject wallPrefab;
+    public GameObject exitPrefab;
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
@@ -37,6 +38,7 @@ public class DungeonGenerator : MonoBehaviour {
         ConnectRooms();
         AllocateWalls();
         AllocatePlayer();
+        AllocateExit();
         AllocateEnemies();
         SpawnDungeon();
 
@@ -250,10 +252,26 @@ public class DungeonGenerator : MonoBehaviour {
 
     public void AllocatePlayer() {
 
-        int randomRoomNumber = Random.Range(0,roomList.Count);
-        Room randomRoom = roomList[randomRoomNumber];
-        roomList[randomRoomNumber].containsPlayer = true;
+        Room randomRoom = roomList[Random.Range(0,roomList.Count)];
+        randomRoom.containsPlayer = true;
         entities.Add(randomRoom.GetRandomTile(),EntityType.Player);
+
+    }
+
+    public void AllocateExit() {
+
+        List<Room> tempRooms = new List<Room>();
+        foreach(Room r in roomList) {
+            if(!r.containsPlayer) {
+                tempRooms.Add(r);
+            }
+        }
+
+        Room randomRoom = tempRooms[Random.Range(0,tempRooms.Count)];
+        Vector3Int exitPos = randomRoom.GetRandomTile();
+        
+        dungeon.Remove(exitPos);
+        dungeon.Add(exitPos,TileType.Exit);
 
     }
 
@@ -292,6 +310,10 @@ public class DungeonGenerator : MonoBehaviour {
 
                 case TileType.Wall:
                     Instantiate(wallPrefab,kv.Key,Quaternion.identity,transform);
+                    break;
+
+                case TileType.Exit:
+                    Instantiate(exitPrefab,kv.Key,Quaternion.identity,transform);
                     break;
 
             }

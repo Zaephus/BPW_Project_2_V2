@@ -43,14 +43,14 @@ public class DungeonManager : MonoBehaviour {
         
         bool entityOnTile = false;
 
-        // foreach(EnemyController enemy in enemies) {
-        //     if(enemy.transform.position == targetTile) {
-        //         entityOnTile = true;
-        //     }
-        //     else {
-        //         entityOnTile = false;
-        //     }
-        // }
+        foreach(EnemyController enemy in enemies) {
+            if(Vector3Int.FloorToInt(enemy.transform.position) == targetTile) {
+                entityOnTile = true;
+            }
+            else {
+                entityOnTile = false;
+            }
+        }
 
         if(player.transform.position == targetTile) {
             entityOnTile = true;

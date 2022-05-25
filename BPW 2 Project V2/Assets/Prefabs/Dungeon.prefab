@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4281026195158587651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4281026195158587649}
+  - component: {fileID: 4281026195158587650}
+  - component: {fileID: 4281026195158587648}
+  m_Layer: 0
+  m_Name: Dungeon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4281026195158587649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4281026195158587651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4281026195158587650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4281026195158587651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8467a50e281d3584ea8ebbe05057c1f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorPrefab: {fileID: 2880854223412604503, guid: 4b5317847dadb6145a5416b468a444b9, type: 3}
+  wallPrefab: {fileID: 8030317466967924066, guid: 963622a794243b04396514d455ada3de, type: 3}
+  exitPrefab: {fileID: 2872222204725475919, guid: 35f436ce8411e1142ba0803eda4a2869, type: 3}
+  playerPrefab: {fileID: 3898488427165075690, guid: b544de40fe8d63245ae6f3809bcbfd8e, type: 3}
+  enemyPrefab: {fileID: 1494348910416182475, guid: 4c61167c3d0193e429a911bc0d9d491d, type: 3}
+  seed: 0
+  gridWidth: 30
+  gridHeight: 30
+  enemyAmount: 6
+  spaceBetweenRooms: 3
+  numRooms: 6
+  minRoomSize: 4
+  maxRoomSize: 7
+--- !u!114 &4281026195158587648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4281026195158587651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd309a6fa5f93f46be261271f22a2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
