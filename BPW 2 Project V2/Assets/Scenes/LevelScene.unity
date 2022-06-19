@@ -184,6 +184,52 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 20}
   m_Constraint: 2
   m_ConstraintCount: 2
+--- !u!1 &133627444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 133627446}
+  - component: {fileID: 133627445}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &133627445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133627444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e72d84aa8e4a44f8f444889d5ca18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dungeon: {fileID: 909823297}
+  battleSystem: {fileID: 739549058}
+--- !u!4 &133627446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133627444}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &562328299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6427512756260491967, guid: fa207d58a2bab7f46a874631fb19d59d, type: 3}
@@ -274,7 +320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &739549058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +333,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d341087b0fcbd36458d1881bed928195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 5604466925094827312, guid: 9b8b8e2653871da43bf50e9713f66a10, type: 3}
+  abilityButtonPrefab: {fileID: 4377894142186384645, guid: f5b47ab868093ef4388d7a07155163da, type: 3}
+  playerPosiiton: {fileID: 562328299}
+  enemyPosition: {fileID: 838635119}
+  playerUnit: {fileID: 11400000, guid: 8519c2f2208685f4a8f9f5854f4cac01, type: 2}
+  enemyUnit: {fileID: 0}
+  dialogueText: {fileID: 1271623763}
+  combatButtons: {fileID: 28333415}
+  abilityButtons: []
+  playerHUD: {fileID: 2112725174}
+  enemyHUD: {fileID: 1597439436}
+  state: 0
+  dialogueActivated: 0
 --- !u!4 &739549059
 Transform:
   m_ObjectHideFlags: 0
@@ -312,6 +371,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6427512756260491967, guid: fa207d58a2bab7f46a874631fb19d59d, type: 3}
   m_PrefabInstance: {fileID: 4944755193681938305}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &909823297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4281026195158587648, guid: e6a41787c7008084ba4b7579bad89b5a, type: 3}
+  m_PrefabInstance: {fileID: 4281026197016475219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd309a6fa5f93f46be261271f22a2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &919851892
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,11 +649,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6335378018643458740, guid: 72356351ccf41064685854516220e262, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6335378018643458740, guid: 72356351ccf41064685854516220e262, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72356351ccf41064685854516220e262, type: 3}
@@ -805,6 +875,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4660153911630258400, guid: 72356351ccf41064685854516220e262, type: 3}
   m_PrefabInstance: {fileID: 1033264182}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1597439436 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4660153911630258403, guid: 72356351ccf41064685854516220e262, type: 3}
+  m_PrefabInstance: {fileID: 1033264182}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c73a217e3b10a414cbf9d931a3e16ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1759466617
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,6 +975,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4660153911630258400, guid: 72356351ccf41064685854516220e262, type: 3}
   m_PrefabInstance: {fileID: 4660153911417749589}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2112725174 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4660153911630258403, guid: 72356351ccf41064685854516220e262, type: 3}
+  m_PrefabInstance: {fileID: 4660153911417749589}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c73a217e3b10a414cbf9d931a3e16ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4281026197016475219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -948,10 +1040,6 @@ PrefabInstance:
     - target: {fileID: 4281026195158587651, guid: e6a41787c7008084ba4b7579bad89b5a, type: 3}
       propertyPath: m_Name
       value: Dungeon
-      objectReference: {fileID: 0}
-    - target: {fileID: 4281026195158587651, guid: e6a41787c7008084ba4b7579bad89b5a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6a41787c7008084ba4b7579bad89b5a, type: 3}
@@ -1052,11 +1140,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6335378018643458740, guid: 72356351ccf41064685854516220e262, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6335378018643458740, guid: 72356351ccf41064685854516220e262, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72356351ccf41064685854516220e262, type: 3}

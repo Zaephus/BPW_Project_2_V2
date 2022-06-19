@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1cffc78a0364e44f9293f2049227be7, type: 3}
+  m_Name: PlayerUnit
+  m_EditorClassIdentifier: 
+  unitName: Player
+  maxHealth: 200
+  currentHealth: 200
+  baseAttackStrength: 2000
+  currentAttackStrength: 2000
+  baseDefenseStrength: 80
+  currentDefenseStrength: 80
+  abilities:
+  - {fileID: 11400000, guid: e9099bf56850fdf42869cdbdda1ad379, type: 2}
+  - {fileID: 11400000, guid: 0b0b89aaa7e05f147801371df7130a30, type: 2}

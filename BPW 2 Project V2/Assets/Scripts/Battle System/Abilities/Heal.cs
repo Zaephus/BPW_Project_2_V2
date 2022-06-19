@@ -14,7 +14,27 @@ public class Heal : Ability {
     }
 
     public override IEnumerator DoBehaviour() {
-        yield return null;
+        
+        battleSystem.state = BattleState.Wait;
+
+        if(battleSystem.playerUnit.currentHealth < battleSystem.playerUnit.maxHealth) {
+
+            battleSystem.StartCoroutine(battleSystem.TypeWriter("You heal by " + healAmount + " HP!"));
+            yield return new WaitUntil(() => battleSystem.dialogueActivated == false);
+            
+            battleSystem.playerUnit.Heal(healAmount);
+            battleSystem.playerHUD.SetHealth(battleSystem.playerUnit.currentHealth);
+
+            battleSystem.state = BattleState.EnemyTurn;
+            battleSystem.StartCoroutine(battleSystem.EnemyTurn());
+
+        }
+        else {
+            battleSystem.StartCoroutine(battleSystem.TypeWriter("You can not heal, you are already at full health!"));
+            yield return new WaitUntil(() => battleSystem.dialogueActivated == false);
+            battleSystem.state = BattleState.PlayerTurn;
+        }
+        
     }
     
 }

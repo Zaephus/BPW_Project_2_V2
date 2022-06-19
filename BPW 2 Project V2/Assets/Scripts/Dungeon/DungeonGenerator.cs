@@ -14,6 +14,10 @@ public class DungeonGenerator : MonoBehaviour {
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
 
+    public Transform wallTransform;
+    public Transform floorTransform;
+    public Transform entityTransform;
+
     public int seed = 0;
 
     public int gridWidth = 30;
@@ -32,6 +36,11 @@ public class DungeonGenerator : MonoBehaviour {
     public Dictionary<Vector3Int,EntityType> entities = new Dictionary<Vector3Int,EntityType>();
 
     public void Generate() {
+
+        seed = 0;
+        roomList.Clear();
+        dungeon.Clear();
+        entities.Clear();
 
         GetSeed();
         AllocateRooms();
@@ -305,15 +314,15 @@ public class DungeonGenerator : MonoBehaviour {
 
                 case TileType.Room:
                 case TileType.Corridor:
-                    Instantiate(floorPrefab,kv.Key,Quaternion.identity,transform);
+                    Instantiate(floorPrefab,kv.Key,Quaternion.identity,floorTransform);
                     break;
 
                 case TileType.Wall:
-                    Instantiate(wallPrefab,kv.Key,Quaternion.identity,transform);
+                    Instantiate(wallPrefab,kv.Key,Quaternion.identity,wallTransform);
                     break;
 
                 case TileType.Exit:
-                    Instantiate(exitPrefab,kv.Key,Quaternion.identity,transform);
+                    Instantiate(exitPrefab,kv.Key,Quaternion.identity,entityTransform);
                     break;
 
             }
@@ -323,13 +332,13 @@ public class DungeonGenerator : MonoBehaviour {
             switch(kv.Value) {
 
                 case EntityType.Player:
-                    GameObject player = Instantiate(playerPrefab,kv.Key,Quaternion.identity);
+                    GameObject player = Instantiate(playerPrefab,kv.Key,Quaternion.identity,entityTransform);
                     //player.GetComponent<PlayerController>().startPos.x = kv.Key.x;
                     //player.GetComponent<PlayerController>().startPos.y = kv.Key.y;
                     break;
 
                 case EntityType.GhostEnemy:
-                    GameObject enemy = Instantiate(enemyPrefab,kv.Key,Quaternion.identity);
+                    GameObject enemy = Instantiate(enemyPrefab,kv.Key,Quaternion.identity,entityTransform);
                     //enemy.GetComponent<EnemyController>().startPos.x = kv.Key.x;
                     //enemy.GetComponent<EnemyController>().startPos.y = kv.Key.y;
                     break;

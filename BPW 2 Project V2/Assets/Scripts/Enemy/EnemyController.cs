@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyController : MonoBehaviour,IInteractable,IFightable {
 
     private DungeonManager dungeon;
+
+    public EnemyUnit baseUnit;
+    [HideInInspector] public EnemyUnit unit;
 
     private Vector3Int targetPosition;
     private Vector3Int nextPosition;
@@ -15,6 +18,9 @@ public class EnemyController : MonoBehaviour {
     public int randomTileRange = 4;
 
     public void Initialize(DungeonManager dm) {
+
+        unit = ScriptableObject.CreateInstance<EnemyUnit>();
+        SetUnitValues();
 
         dungeon = dm;
 
@@ -37,6 +43,8 @@ public class EnemyController : MonoBehaviour {
         }
 
     }
+
+    public void Interact(PlayerManager p) {}
 
     public void MoveTowardsTarget(Vector3Int target) {
 
@@ -222,6 +230,27 @@ public class EnemyController : MonoBehaviour {
         }
         return canMove;
         
+    }
+
+    public void SetUnitValues() {
+
+        unit.enemy = this;
+
+        unit.unitName = baseUnit.unitName.Replace("Enemy","");
+
+        unit.maxHealth = baseUnit.maxHealth;
+        unit.currentHealth = baseUnit.currentHealth;
+
+        unit.baseAttackStrength = baseUnit.baseAttackStrength;
+        unit.currentAttackStrength = baseUnit.currentAttackStrength;
+
+        unit.baseDefenseStrength = baseUnit.baseDefenseStrength;
+        unit.currentDefenseStrength = baseUnit.currentDefenseStrength;
+
+        unit.unitPrefab = baseUnit.unitPrefab;
+
+        unit.abilities = baseUnit.abilities;
+
     }
 
 }
