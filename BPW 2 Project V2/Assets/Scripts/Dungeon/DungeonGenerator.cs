@@ -130,7 +130,7 @@ public class DungeonGenerator : MonoBehaviour {
                 Room roomTwo = roomList[j];
 
                 if(CanConnectRooms(roomOne,roomTwo)) {
-                    if((roomTwo.GetCenter().x < roomOne.minX && roomTwo.GetCenter().x > roomOne.maxX) || (roomTwo.GetCenter().y < roomOne.minY && roomTwo.GetCenter().y > roomOne.maxY)) {
+                    if((roomTwo.GetCenter().x < roomOne.minX || roomTwo.GetCenter().x > roomOne.maxX) || (roomTwo.GetCenter().y < roomOne.minY || roomTwo.GetCenter().y > roomOne.maxY)) {
                         if(!roomOne.connectedRooms.Contains(roomTwo) && !roomTwo.connectedRooms.Contains(roomOne)) {
                             AllocateCorridors(roomOne,roomTwo);
                         }

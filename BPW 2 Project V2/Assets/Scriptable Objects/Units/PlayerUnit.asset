@@ -19,7 +19,9 @@ MonoBehaviour:
   currentAttackStrength: 120
   baseDefenseStrength: 80
   currentDefenseStrength: 80
-  items: []
+  items:
+  - {fileID: 0}
+  - {fileID: 0}
   abilities:
   - {fileID: 11400000, guid: e9099bf56850fdf42869cdbdda1ad379, type: 2}
   - {fileID: 11400000, guid: 0b0b89aaa7e05f147801371df7130a30, type: 2}

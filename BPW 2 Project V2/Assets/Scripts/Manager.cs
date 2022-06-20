@@ -17,12 +17,15 @@ public class Manager : MonoBehaviour {
     public BattleSystem battleSystem;
     public GameObject mainMenu;
     public GameObject gameOverMenu;
+    private SaveSystem saveSystem;
 
     public PlayerUnit pUnit;
 
     public List<Item> items = new List<Item>();
 
-    public void Start() {}
+    public void Start() {
+        saveSystem = GetComponent<SaveSystem>();
+    }
 
     public void Update() {
         if(Input.GetKeyDown("escape")) {
@@ -40,10 +43,13 @@ public class Manager : MonoBehaviour {
 
     public void StartGame() {
 
-        pUnit.currentAttackStrength = pUnit.baseAttackStrength;
-        pUnit.currentDefenseStrength = pUnit.baseDefenseStrength;
-        pUnit.currentHealth = pUnit.maxHealth;
-        pUnit.items.Clear();
+        // pUnit.currentAttackStrength = pUnit.baseAttackStrength;
+        // pUnit.currentDefenseStrength = pUnit.baseDefenseStrength;
+        // pUnit.currentHealth = pUnit.maxHealth;
+        // pUnit.items.Clear();
+
+        saveSystem.LoadUnit(pUnit,"PlayerUnit");
+
         battleSystem.gameObject.SetActive(false);
         gameOverMenu.SetActive(false);
         mainMenu.SetActive(false);
@@ -79,6 +85,7 @@ public class Manager : MonoBehaviour {
 
     public IEnumerator LostBattle() {
         gameOverMenu.SetActive(true);
+        pUnit.currentHealth = pUnit.maxHealth;
         yield return new WaitForEndOfFrame();
         
         battleSystem.gameObject.SetActive(false);
@@ -91,6 +98,7 @@ public class Manager : MonoBehaviour {
     }
 
     public void Exit() {
+        saveSystem.SaveUnit(pUnit,"PlayerUnit");
         Application.Quit();
     }
 

@@ -43,3 +43,18 @@ public class Unit : ScriptableObject {
     }
     
 }
+
+public class UnitSaver {
+
+    public string unitName;
+
+    public int maxHealth;
+    public int currentHealth;
+
+    public int baseAttackStrength;
+    public int currentAttackStrength;
+
+    public int baseDefenseStrength;
+    public int currentDefenseStrength;
+    
+}
