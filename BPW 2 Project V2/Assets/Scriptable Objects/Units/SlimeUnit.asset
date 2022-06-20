@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b343e5e8caca54498f87699675c9223, type: 3}
-  m_Name: GhostUnit
+  m_Name: SlimeUnit
   m_EditorClassIdentifier: 
-  unitName: GhostEnemy
-  maxHealth: 100
-  currentHealth: 100
-  baseAttackStrength: 100
-  currentAttackStrength: 100
+  unitName: SlimeEnemy
+  maxHealth: 150
+  currentHealth: 150
+  baseAttackStrength: 80
+  currentAttackStrength: 80
   baseDefenseStrength: 120
   currentDefenseStrength: 120
   enemy: {fileID: 0}
-  unitPrefab: {fileID: 6185942745261552381, guid: 8b334ec76a3fc8e44917b3b33c0015e2, type: 3}
+  unitPrefab: {fileID: 6185942745261552381, guid: bb43c19cf0390564b9da49bfcb5c74b8, type: 3}
   abilities:
-  - {fileID: 11400000, guid: 37567be7029c7834ead228581d5eab8f, type: 2}
+  - {fileID: 11400000, guid: 4fc8ffbd25dd12a49ae94b0976671d31, type: 2}
+  - {fileID: 11400000, guid: b1d0648931cb83746839a6fe5d3e3999, type: 2}

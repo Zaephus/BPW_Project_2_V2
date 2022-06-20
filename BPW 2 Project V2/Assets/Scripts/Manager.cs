@@ -15,14 +15,47 @@ public class Manager : MonoBehaviour {
 
     public DungeonManager dungeon;
     public BattleSystem battleSystem;
+    public GameObject mainMenu;
+    public GameObject gameOverMenu;
+
+    public PlayerUnit pUnit;
+
+    public List<Item> items = new List<Item>();
 
     public void Start() {}
 
-    public void Update() {}
+    public void Update() {
+        if(Input.GetKeyDown("escape")) {
+            StartCoroutine(MainMenu());
+        }
+    }
+
+    public IEnumerator MainMenu() {
+        yield return new WaitForEndOfFrame();
+        battleSystem.gameObject.SetActive(false);
+        dungeon.gameObject.SetActive(false);
+        gameOverMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
+
+    public void StartGame() {
+
+        pUnit.currentAttackStrength = pUnit.baseAttackStrength;
+        pUnit.currentDefenseStrength = pUnit.baseDefenseStrength;
+        pUnit.currentHealth = pUnit.maxHealth;
+        pUnit.items.Clear();
+        battleSystem.gameObject.SetActive(false);
+        gameOverMenu.SetActive(false);
+        mainMenu.SetActive(false);
+        dungeon.gameObject.SetActive(true);
+
+    }
 
     public IEnumerator StartBattle(EnemyUnit unit) {
         battleSystem.gameObject.SetActive(true);
         dungeon.gameObject.SetActive(false);
+        gameOverMenu.SetActive(false);
+        mainMenu.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         battleSystem.Initialize(unit);
     }
@@ -30,6 +63,10 @@ public class Manager : MonoBehaviour {
     public IEnumerator WonBattle(EnemyController enemy) {
         
         battleSystem.gameObject.SetActive(false);
+        gameOverMenu.SetActive(false);
+        mainMenu.SetActive(false);
+
+        Instantiate(items[Random.Range(0,items.Count)],enemy.transform.position,Quaternion.identity,enemy.transform.parent);
 
         Destroy(enemy.gameObject);
         dungeon.enemies.Remove(enemy);
@@ -41,11 +78,20 @@ public class Manager : MonoBehaviour {
     }
 
     public IEnumerator LostBattle() {
-        yield return null;
+        gameOverMenu.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        
+        battleSystem.gameObject.SetActive(false);
+        dungeon.gameObject.SetActive(false);
+        mainMenu.SetActive(false);
     }
 
     public void NextDungeon() {
         dungeon.StartCoroutine(dungeon.ResetDungeon());
+    }
+
+    public void Exit() {
+        Application.Quit();
     }
 
 }

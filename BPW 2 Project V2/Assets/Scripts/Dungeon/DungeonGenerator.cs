@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 public enum TileType {Room,Corridor,Wall,Exit}
-public enum EntityType {Player,GhostEnemy}
+public enum EntityType {Player,GhostEnemy,SlimeEnemy}
 
 public class DungeonGenerator : MonoBehaviour {
 
@@ -12,7 +12,8 @@ public class DungeonGenerator : MonoBehaviour {
     public GameObject wallPrefab;
     public GameObject exitPrefab;
     public GameObject playerPrefab;
-    public GameObject enemyPrefab;
+    public GameObject ghostEnemyPrefab;
+    public GameObject slimeEnemyPrefab;
 
     public Transform wallTransform;
     public Transform floorTransform;
@@ -45,6 +46,7 @@ public class DungeonGenerator : MonoBehaviour {
         GetSeed();
         AllocateRooms();
         ConnectRooms();
+        AreRoomsConnected(roomList);
         AllocateWalls();
         AllocatePlayer();
         AllocateExit();
@@ -241,6 +243,67 @@ public class DungeonGenerator : MonoBehaviour {
 
     }
 
+    public void AreRoomsConnected(List<Room> r) {
+
+        List<Room> rooms = new List<Room>();
+        rooms.AddRange(r);
+        List<Room> island = new List<Room>();
+
+        Room roomOne = rooms[0];
+        rooms.Remove(roomOne);
+        island.Add(roomOne);
+
+        for(int i = 0; i < roomOne.connectedRooms.Count; i++) {
+            Room connectedRoom = roomOne.connectedRooms[i];
+            if(island.Contains(connectedRoom)) {
+                continue;
+            }
+            else {
+                island.Add(connectedRoom);
+                rooms.Remove(connectedRoom);
+            }
+        }
+
+        for(int i = 1; i < island.Count; i++) {
+            Room islandRoom = island[i];
+            foreach(Room connectedIslandRoom in islandRoom.connectedRooms) {
+                if(island.Contains(connectedIslandRoom)) {
+                    continue;
+                }
+                else {
+                    island.Add(connectedIslandRoom);
+                    rooms.Remove(connectedIslandRoom);
+                }
+            }
+        }
+        
+        if(rooms.Count != 0) {
+            ConnectIslands(rooms,island);
+        }
+
+    }
+
+    public void ConnectIslands(List<Room> islandOne,List<Room> islandTwo) {
+
+        Room roomOne = islandOne[0];
+        Room roomTwo = islandTwo[0];
+
+        for(int i = 0; i < islandOne.Count; i++) {
+            for(int j = 0; j < islandTwo.Count; j++) {
+                if(Vector3Int.Distance(islandOne[i].GetCenter(),islandTwo[j].GetCenter()) >= Vector3Int.Distance(roomOne.GetCenter(),roomTwo.GetCenter())) {
+                    continue;
+                }
+                else {
+                    roomOne = islandOne[i];
+                    roomTwo = islandTwo[j];
+                }
+            }
+        }
+
+        AllocateCorridors(roomOne,roomTwo);
+
+    }
+
     public void AllocateWalls() {
 
         List<Vector3Int> keys = dungeon.Keys.ToList();
@@ -301,7 +364,13 @@ public class DungeonGenerator : MonoBehaviour {
                 i--;
             }
             else {
-                entities.Add(pos,EntityType.GhostEnemy);
+                int t = Random.Range(0,2);
+                if(t == 0) {
+                    entities.Add(pos,EntityType.GhostEnemy);
+                }
+                else if(t == 1) {
+                    entities.Add(pos,EntityType.SlimeEnemy);
+                }
             }
         }
 
@@ -332,15 +401,15 @@ public class DungeonGenerator : MonoBehaviour {
             switch(kv.Value) {
 
                 case EntityType.Player:
-                    GameObject player = Instantiate(playerPrefab,kv.Key,Quaternion.identity,entityTransform);
-                    //player.GetComponent<PlayerController>().startPos.x = kv.Key.x;
-                    //player.GetComponent<PlayerController>().startPos.y = kv.Key.y;
+                    Instantiate(playerPrefab,kv.Key,Quaternion.identity,entityTransform);
                     break;
 
                 case EntityType.GhostEnemy:
-                    GameObject enemy = Instantiate(enemyPrefab,kv.Key,Quaternion.identity,entityTransform);
-                    //enemy.GetComponent<EnemyController>().startPos.x = kv.Key.x;
-                    //enemy.GetComponent<EnemyController>().startPos.y = kv.Key.y;
+                    Instantiate(ghostEnemyPrefab,kv.Key,Quaternion.identity,entityTransform);
+                    break;
+
+                case EntityType.SlimeEnemy:
+                    Instantiate(slimeEnemyPrefab,kv.Key,Quaternion.identity,entityTransform);
                     break;
 
             }
